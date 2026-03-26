@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+body {
+  font-family: "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
+  @apply bg-gray-50 text-gray-900;
+}
+
+/* Hindi text styling */
+.hindi-text {
+  font-family: "Noto Sans Devanagari", "Mangal", sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Loading animation */
+.loading-spinner {
+  @apply animate-spin rounded-full border-4 border-gray-200 border-t-primary-600;
+}
+
+/* Status badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.badge-draft {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.badge-reviewed {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.badge-approved {
+  @apply bg-green-100 text-green-800;
+}
+
+.badge-rejected {
+  @apply bg-red-100 text-red-800;
+}
+
+.badge-hindi {
+  @apply bg-orange-100 text-orange-800;
+}
+
+.badge-english {
+  @apply bg-purple-100 text-purple-800;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.card-hover {
+  @apply transition-shadow hover:shadow-md cursor-pointer;
+}
+
+/* Button styles */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+}
+
+.btn-secondary {
+  @apply bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-primary-500;
+}
+
+.btn-success {
+  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Input styles */
+.input {
+  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500;
+}
+
+/* Textarea styles */
+.textarea {
+  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 resize-none;
+}
+
+/* File upload area */
+.upload-zone {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition-colors;
+}
+
+.upload-zone:hover {
+  @apply border-primary-400 bg-primary-50;
+}
+
+.upload-zone-active {
+  @apply border-primary-500 bg-primary-50;
+}
+
+/* FIR content display */
+.fir-content {
+  @apply font-mono text-sm whitespace-pre-wrap bg-gray-50 p-4 rounded-lg border;
+}
+
+/* Progress steps */
+.progress-step {
+  @apply flex items-center;
+}
+
+.progress-step-active {
+  @apply text-primary-600;
+}
+
+.progress-step-completed {
+  @apply text-green-600;
+}
+
+.progress-step-pending {
+  @apply text-gray-400;
+}
