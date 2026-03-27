@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  # ── FastAPI Backend ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      APP_NAME: CaseSync
+      APP_VERSION: "1.0.0"
+      DEBUG: "false"
+      DATABASE_URL: sqlite:///./casesync.db
+      CORS_ORIGINS: '["http://localhost", "http://localhost:80", "http://frontend"]'
+      DEEPGRAM_API_KEY: ${DEEPGRAM_API_KEY:-}
+      DEEPGRAM_API_URL: https://api.deepgram.com/v1/listen
+      SUPPORTED_LANGUAGES: '["en","hi"]'
+      DEFAULT_LANGUAGE: en
+      NER_MODEL: bert-base-multilingual-cased
+      MAX_UPLOAD_SIZE: "52428800"
+    volumes:
+      - backend_data:/app # persists casesync.db, uploads/, pdfs/
+      - hf_cache:/app/.hf_cache # persists HuggingFace model downloads
+    ports:
+      - "8000:8000" # optional: direct API access during development
+
+  # ── React / Vite Frontend (nginx) ────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  backend_data:
+  hf_cache:
