@@ -163,6 +163,67 @@ function Upload() {
     reset();
   };
 
+  const [guideOpen, setGuideOpen] = useState(true);
+
+  const recordingGuide = [
+    {
+      step: 1,
+      field: "Your Full Name",
+      hint: "State your complete name clearly.",
+      en: '"My name is Ramesh Kumar Singh."',
+      hi: '"मेरा नाम रमेश कुमार सिंह है।"',
+    },
+    {
+      step: 2,
+      field: "Your Address",
+      hint: "Mention your full residential address.",
+      en: '"I reside at 45, Sector 12, Noida, Uttar Pradesh."',
+      hi: '"मैं 45, सेक्टर 12, नोएडा, उत्तर प्रदेश में रहता हूँ।"',
+    },
+    {
+      step: 3,
+      field: "Date & Time of Incident",
+      hint: "Mention the exact date and time when the incident occurred.",
+      en: '"The incident took place on 25th March 2026 at around 9 PM."',
+      hi: '"यह घटना 25 मार्च 2026 को रात लगभग 9 बजे हुई।"',
+    },
+    {
+      step: 4,
+      field: "Location of Incident",
+      hint: "Describe where the incident happened as precisely as possible.",
+      en: '"It happened near MG Road, Gandhi Nagar, Delhi."',
+      hi: '"यह घटना एमजी रोड, गांधी नगर, दिल्ली के पास हुई।"',
+    },
+    {
+      step: 5,
+      field: "Names of Accused Persons",
+      hint: "Clearly name everyone involved on the other side.",
+      en: '"The accused persons are Suresh Yadav and Mohan Lal."',
+      hi: '"आरोपी का नाम सुरेश यादव और मोहन लाल है।"',
+    },
+    {
+      step: 6,
+      field: "Names of Witnesses",
+      hint: "Mention anyone who witnessed the incident.",
+      en: '"The witnesses are Priya Sharma and Ajay Verma."',
+      hi: '"गवाहों के नाम प्रिया शर्मा और अजय वर्मा हैं।"',
+    },
+    {
+      step: 7,
+      field: "Description of Incident",
+      hint: "Narrate what exactly happened — the sequence of events.",
+      en: '"He forcefully entered my house, threatened me, and stole my laptop and ₹15,000 cash."',
+      hi: '"उसने जबरदस्ती मेरे घर में घुसकर मुझे धमकाया और मेरा लैपटॉप एवं ₹15,000 नकद चुरा लिया।"',
+    },
+    {
+      step: 8,
+      field: "Police Station / Area",
+      hint: "Name the police station jurisdiction where you are filing.",
+      en: '"I am filing this complaint at Gandhi Nagar Police Station."',
+      hi: '"मैं यह शिकायत गांधी नगर पुलिस स्टेशन में दर्ज करा रहा हूँ।"',
+    },
+  ];
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Page Header */}
@@ -175,6 +236,84 @@ function Upload() {
           will automatically transcribe, extract entities, and generate an FIR
           draft.
         </p>
+      </div>
+
+      {/* Recording Guide */}
+      <div className="card mb-6 border-blue-200 bg-blue-50">
+        <button
+          className="w-full flex items-center justify-between text-left focus:outline-none"
+          onClick={() => setGuideOpen((o) => !o)}
+        >
+          <div className="flex items-center space-x-3">
+            <div className="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg
+                className="w-5 h-5 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 text-base">
+                Recording Guide — Speak these details clearly
+              </h3>
+              <p className="text-xs text-gray-500">
+                Follow this script while recording for best AI accuracy
+              </p>
+            </div>
+          </div>
+          <svg
+            className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${guideOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+
+        {guideOpen && (
+          <div className="mt-5 space-y-3">
+            {recordingGuide.map(({ step, field, hint, en, hi }) => (
+              <div
+                key={step}
+                className="flex space-x-3 bg-white rounded-lg p-3 border border-blue-100 shadow-sm"
+              >
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center">
+                  {step}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center space-x-2 mb-0.5">
+                    <span className="font-semibold text-gray-900 text-sm">
+                      {field}
+                    </span>
+                    <span className="text-xs text-gray-400">— {hint}</span>
+                  </div>
+                  <p className="text-sm text-blue-700 font-medium">{en}</p>
+                  <p className="text-sm text-orange-600 font-medium mt-0.5">
+                    {hi}
+                  </p>
+                </div>
+              </div>
+            ))}
+            <p className="text-xs text-gray-500 text-center pt-1">
+              💡 Tip: Speak each point one at a time, clearly and at a normal
+              pace for best transcription quality.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Upload Area */}
